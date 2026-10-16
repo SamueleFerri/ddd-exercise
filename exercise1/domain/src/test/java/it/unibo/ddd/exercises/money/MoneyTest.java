@@ -6,11 +6,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 // TODO: remove @Disabled once the types under test exist (cf. step 2 of exercise1/walkthrough.md)
-@Disabled("TODO: not implemented yet")
+//@Disabled("TODO: not implemented yet")
 class MoneyTest {
     @Test
     void equalAmountsAreEqual() {
         // TODO: 10.5 EUR equals 10.50 EUR, but not 10.50 USD
+        assertEquals(eur(10.5), eur(10.50));
+        assertNotEquals(eur(10.5), usd(10.50));
         fail("TODO");
     }
 
