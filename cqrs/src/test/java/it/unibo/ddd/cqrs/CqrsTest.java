@@ -1,5 +1,6 @@
 package it.unibo.ddd.cqrs;
 
+import it.unibo.ddd.Variation;
 import it.unibo.ddd.cqrs.impl.CounterReaderImpl;
 import it.unibo.ddd.cqrs.impl.CounterWriterImpl;
 import org.junit.jupiter.api.Disabled;
@@ -14,7 +15,7 @@ import java.time.ZoneOffset;
 import static org.junit.jupiter.api.Assertions.*;
 
 // TODO: remove @Disabled once the implementations are ready (cf. cqrs/walkthrough.md)
-@Disabled("TODO: not implemented yet")
+//@Disabled("TODO: not implemented yet")
 class CqrsTest {
     private static final Instant T0 = Instant.parse("2026-01-01T10:00:00Z");
 
@@ -47,7 +48,11 @@ class CqrsTest {
         var writer = new CounterWriterImpl(tickingClock());
         // TODO: setValue(5), then setValue(3), then check that the variations are exactly
         //       Variation.of(0, 5, T0) and Variation.of(5, 3, T0 + 1 minute)
-        fail("TODO");
+        writer.setValue(5);
+        writer.setValue(3);
+        var variations = writer.getVariations().iterator();
+        assertEquals(Variation.of(0, 5, T0), variations.next());
+        assertEquals(Variation.of(5, 3, T0.plusSeconds(60)), variations.next());
     }
 
     @Test
